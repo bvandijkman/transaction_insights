@@ -7,6 +7,7 @@ st.title("Insight in your transactions")
 st.subheader("Load your transaction file to get insights into your monthly spending")
 
 filename = st.file_uploader("Load your data", ['csv', 'xlsx'])
+
 if filename: 
     df = helpers.load_data(filename)
 
