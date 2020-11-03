@@ -3,8 +3,8 @@ import pandas as pd
 
 
 @st.cache(allow_output_mutation=True)
-def load_data():
-    df = pd.read_csv("data/data.csv", sep = ';', decimal=',')
+def load_data(filename):
+    df = pd.read_csv(filename, sep = ';', decimal=',')
     return df
 
 @st.cache
