@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-@st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True, suppress_st_warning=True)
 def load_transactions(filename):
     """Load the transactions
 
@@ -15,7 +15,14 @@ def load_transactions(filename):
     """
     
     filename.seek(0) # reset the buffer
-    df = pd.read_csv(filename, sep = ';', decimal=',')
+    try: 
+        df = pd.read_csv(filename, sep = ';', decimal=',')
+    except pd.errors.ParserError: 
+        df = pd.read_excel(filename)    
+    except pd.errors.EmptyDataError:
+        st.info("No data was found in your Excel file")
+        st.stop()
+    
     return df
 
 
