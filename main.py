@@ -16,7 +16,7 @@ def main():
     if filename is not None: 
         
         # Load data
-        df = helpers.load_data(filename)
+        df = helpers.load_transactions(filename)
 
         # Preprocess Data
         df = helpers.preprocessing(df)
@@ -33,6 +33,6 @@ def main():
         # Sum the amount per category
         st.write(df.groupby(['Month', 'Tag'])['Bedrag (EUR)'].agg('sum'))
 
-    
+
 if __name__ == '__main__':
     main()
