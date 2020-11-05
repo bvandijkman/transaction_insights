@@ -26,12 +26,17 @@ def main():
         
         # Select columns
         data = df[['Naam / Omschrijving', 'Tag', 'Bedrag (EUR)', 'Af Bij']]
+
+        # Sum the amount per category per month        
+        grouped_data = df.groupby(['Month', 'Tag'])['Bedrag (EUR)'].agg('sum')
+        
+        st.subheader("Transactions grouped by month")
+        st.write(grouped_data)
         
         # Look at transactions that are not yet tagged (other) 
+        st.subheader("Transactions without a tag")
         st.write(data[data['Tag'].str.contains("Other")])
         
-        # Sum the amount per category
-        st.write(df.groupby(['Month', 'Tag'])['Bedrag (EUR)'].agg('sum'))
 
 
 if __name__ == '__main__':
